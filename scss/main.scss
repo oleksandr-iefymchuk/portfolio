@@ -1,0 +1,12 @@
+body{
+    background-color: $bg;
+    color: $text;
+    user-select: none;
+}
+
+.image {
+    width: 500px;
+    height: 500px;
+    background-size: cover;
+    background-image: url('../img/bg.jpg');
+}
