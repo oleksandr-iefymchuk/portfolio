@@ -1,10 +1,13 @@
 import * as THREE from 'three';
+import map from '../img/map.webp';
 
-const slide = document.querySelector(".slide-1");
+
+
+const slides = document.querySelectorAll(".slide");
 const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
 renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setClearColor(0x000007, 0);
-slide.appendChild( renderer.domElement );
+// renderer.setClearColor(0x000007, 0);
+slides[0].appendChild( renderer.domElement );
 
 const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
 camera.position.set(-0.7, 0, 3);
@@ -17,7 +20,7 @@ scene.fog = new THREE.Fog(0x000007, 0.5, 3.5);
 
 
 const ambientLight = new THREE.AmbientLight();
-// ambientLight.intensity = 3;
+ambientLight.intensity = 5;
 const light = new THREE.SpotLight(0xFFFFFF, 10);
 light.position.set(-4, 3, 1);
 light.castShadow = true;
@@ -67,7 +70,7 @@ const mathRandom = (num = 1) => {
   const setNumber = - Math.random() * num + Math.random() * num;
   return setNumber;
 }
-const getRandomArbitrary = (min, max) => Math.random() * (max - min) + min;
+const getRandomNum = (min, max) => Math.random() * (max - min) + min;
 
 const generateParticle = (num, pos) => {
   const gmaterial = new THREE.MeshStandardMaterial({color:0xFFFFFF, roughness: 0.3, side:THREE.DoubleSide});
@@ -83,7 +86,7 @@ const generateParticle = (num, pos) => {
     particularGruop.add(particular);
   }
 }
-generateParticle(100, 1);
+generateParticle(200, 1);
 
 const generateColor = () => Math.random() < 0.5 ? 0xFFFF00 : 0x7B68EE;
 
@@ -91,8 +94,7 @@ const init = () => {
   let numberFigures = 7;
   for (let i = 0; i < numberFigures; i++) {
     const geometry = new THREE.BoxGeometry();
-    const texture = new THREE.TextureLoader().load( '/img/normal-map.webp');
-    console.log('texture', texture)
+    const texture = new THREE.TextureLoader().load(map);
     
     const material = new THREE.MeshStandardMaterial({color: generateColor(), roughness: 0, transparent:false, opacity:1, wireframe:false});
     material.normalMap = texture;
@@ -105,7 +107,7 @@ const init = () => {
     cube.castShadow = true;
     cube.receiveShadow = true;
 
-    const newScaleValue = getRandomArbitrary(0.07, 0.21);
+    const newScaleValue = getRandomNum(0.07, 0.21);
     cube.scale.set(newScaleValue,newScaleValue,newScaleValue);
     cube.rotation.x = mathRandom(180 * Math.PI / 180);
     cube.rotation.y = mathRandom(180 * Math.PI / 180);
@@ -134,7 +136,7 @@ const animate = () => {
     newCubes.position.y = Math.cos(time * newCubes.positionX) * newCubes.positionZ;
     newCubes.position.z = Math.sin(time * newCubes.positionY) * newCubes.positionX;
   }
-  particularGruop.rotation.z += 0.005;
+  particularGruop.rotation.z += 0.002;
   particularGruop.rotation.y -= (mouse.x + particularGruop.rotation.y) * 0.025;
   particularGruop.rotation.x -= (-mouse.y + particularGruop.rotation.x) * 0.1;
   modularGruop.rotation.y -= ((mouse.x*2) + modularGruop.rotation.y) * 0.1;

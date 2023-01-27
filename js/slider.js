@@ -1,8 +1,9 @@
 const sliderLine = document.querySelector(".slider-line");
 const slides = document.querySelectorAll(".slide");
 const buttonSliderNext = document.querySelector(".button-slider-next");
-const dots = document.querySelectorAll(".slider-dots_item");
 const sliderDots = document.querySelector(".slider-dots");
+const dots = document.querySelectorAll(".dot");
+
 let count = 0;
 let isMoving = false;
 let posInit = 0;
