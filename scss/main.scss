@@ -34,13 +34,24 @@
   border: none;
 }
 
+@mixin burger-line {
+  position: absolute;
+  background-image: linear-gradient(to right, map-get($colors, extra-color) 50%, map-get($colors, main-color) 50%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  width: 70%;
+  height: 6%;
+  right: 0;
+  transition: all 0.5s;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-html,
+
 body {
   height: 100%;
   background: #010319;
@@ -50,6 +61,79 @@ body {
     height: 100vh;
     max-width: 100%;
     overflow: hidden;
+
+    .burger-menu {
+      cursor: pointer;
+      display: block;
+      width: 55px;
+      height: 40px;
+      position: fixed;
+      top: 7vh;
+      right: 5vw;
+      z-index: 4;
+
+      .menu-line {
+        @include burger-line;
+        top: 50%;
+        width: 55%;
+        transform: scale(1) translate(0px, -50%);
+
+        &._activ {
+          transform: scale(0);
+        }
+      }
+
+      &::before {
+        @include burger-line;
+        content: "";
+        top: 20%;
+        transition: all 0.3s;
+      }
+
+      &::after {
+        @include burger-line;
+        content: "";
+        bottom: 20%;
+        transition: all 0.7s;
+      }
+
+      &._activ::before {
+        transition: all 0.5s;
+        top: 50%;
+        transform: rotate(-45deg) translate(0px, -50%);
+      }
+
+      &._activ::after {
+        transition: all 0.5s;
+        bottom: 50%;
+        transform: rotate(45deg) translate(0px, 50%);
+      }
+
+      &:hover::before,
+      &:hover .menu-line,
+      &:hover::after {
+        background-position: 0%;
+      }
+    }
+
+    .header-navbar {
+      text-align: left;
+      font-size: 1.1rem;
+      padding: 5px 0px 0px 0px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 3;
+      overflow: auto;
+      left: 100%;
+      transition: all 1s ease 0s;
+
+      &._activ {
+        left: 0;
+      }
+    }
 
     .slider {
       display: flex;
@@ -134,9 +218,9 @@ body {
       width: 50px;
       height: 50px;
       font-size: 24px;
-      background: rgba(123, 104, 238, 0.2);
+      background: map-get($colors , bg-color);
       border: none;
-      
+
       &::before {
         @include position-center;
         content: "";
@@ -187,6 +271,7 @@ body {
 }
 
 @media screen and (max-width: 900px) {
+
   html,
   body {
     .wrapper {
@@ -196,6 +281,7 @@ body {
             .content {
               height: 40vh;
               width: 100vw;
+
               h1 {
                 font-size: 60px;
               }

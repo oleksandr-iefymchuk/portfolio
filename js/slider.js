@@ -1,7 +1,8 @@
+import {burgerMenu} from './burger'
+
 const sliderLine = document.querySelector(".slider-line");
 const slides = document.querySelectorAll(".slide");
 const buttonSliderNext = document.querySelector(".button-slider-next");
-const sliderDots = document.querySelector(".slider-dots");
 const dots = document.querySelectorAll(".dot");
 
 let count = 0;
@@ -44,6 +45,9 @@ const scrollUp = () => {
 };
 
 const wheelSlide = (e) => {
+  if (burgerMenu.classList.contains("_activ")){
+    return;
+  }
   if (e.deltaY > 0) {
     if (isMoving) return;
     letMove();
@@ -85,4 +89,4 @@ const swipeEnd = (e) => {
   }
 }
 
-export {buttonSliderNext, sliderDots, sliderLine, wheelSlide, scrollDown, currentSlide, swipeStart, swipeAction, swipeEnd}
+export {buttonSliderNext, dots, sliderLine, wheelSlide, scrollDown, currentSlide, swipeStart, swipeAction, swipeEnd}

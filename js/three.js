@@ -136,7 +136,7 @@ const animate = () => {
     newCubes.position.y = Math.cos(time * newCubes.positionX) * newCubes.positionZ;
     newCubes.position.z = Math.sin(time * newCubes.positionY) * newCubes.positionX;
   }
-  particularGruop.rotation.z += 0.002;
+  particularGruop.rotation.z -= 0.002;
   particularGruop.rotation.y -= (mouse.x + particularGruop.rotation.y) * 0.025;
   particularGruop.rotation.x -= (-mouse.y + particularGruop.rotation.x) * 0.1;
   modularGruop.rotation.y -= ((mouse.x*2) + modularGruop.rotation.y) * 0.1;
