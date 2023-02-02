@@ -53,8 +53,11 @@
 
 
 body {
+  font-family: $main-font;
+  font-size: 1.8vw;
+  letter-spacing: 1px;
   height: 100%;
-  background: #010319;
+  background: map-get($colors , bg-color);
   overflow: hidden;
 
   .wrapper {
@@ -68,8 +71,8 @@ body {
       width: 55px;
       height: 40px;
       position: fixed;
-      top: 7vh;
-      right: 5vw;
+      top: 5vh;
+      right: 4vw;
       z-index: 4;
 
       .menu-line {
@@ -117,22 +120,32 @@ body {
     }
 
     .header-navbar {
-      text-align: left;
-      font-size: 1.1rem;
-      padding: 5px 0px 0px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content:space-evenly;
+      font-size: 5vw;
       position: fixed;
       top: 0;
+      left: 100%;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
       z-index: 3;
       overflow: auto;
-      left: 100%;
       transition: all 1s ease 0s;
 
       &._activ {
         left: 0;
       }
+
+      .nav-link{
+        text-decoration: none;
+        font-weight: 600;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 0.5px #fff;
+      }
+
     }
 
     .slider {
@@ -148,23 +161,76 @@ body {
 
           .content {
             height: 100vh;
-            min-width: 60vw;
+            width: 100vw;
             position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+            &.first-slide{
+              font-family: $extra-font;
+              max-width: 40vw;
+              margin-left: 10%;
+              display: flex;
+              flex-direction: column;
+              align-items:flex-start;
+              justify-content:center;
+            }
+
+            .content-title{
+              position: relative;
+
+              h2{
+                letter-spacing: 5px;
+                font-size: 11vw;
+                -webkit-text-fill-color: transparent;
+                -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
+                text-align: center;
+              }
+  
+              h3{
+                color: map-get($colors, main-color);
+                position: absolute;
+                top: 70%;
+                left: 50%;
+                transform: translate(-50%, -70%);
+                font-weight: 400;
+              }
+            }
 
             h1 {
-              color: map-get($colors, main-color);
-              font-size: 70px;
+              color: map-get($colors, extra-color);
+              font-size: 3.7vw;
               font-weight: 300;
               text-shadow: map-get($colors, extra-color) 2px -2px 4px, rgb(67, 35, 246) -2px -3px 6px;
 
-              .world {
-                color: map-get($colors, extra-color);
+              span {
+                color: map-get($colors, main-color);
               }
             }
+
+            .hello{
+              font-weight: 400;
+              font-size: 3.5vw;
+              -webkit-text-fill-color: #fff;
+            }
+
+            .introductory-text{
+              color: map-get($colors, main-color);
+            }
+
+            .button-learn{
+              font-family: $main-font;
+              font-size: 1.2vw;
+              font-weight: 200;
+              width: 180px;
+              height: 56px;
+              margin-top: 25px;
+              background-color: transparent;
+              color:map-get($colors , main-color);
+              border: 2px solid #fff;
+              letter-spacing: 1.2px;
+            }
           }
+
+
         }
       }
     }
@@ -218,7 +284,7 @@ body {
       width: 50px;
       height: 50px;
       font-size: 24px;
-      background: map-get($colors , bg-color);
+      background: map-get($colors , button-color);
       border: none;
 
       &::before {
@@ -279,11 +345,42 @@ body {
         .slider-line {
           .slide {
             .content {
-              height: 40vh;
+              height: 50vh;
               width: 100vw;
 
+              &.first-slide{
+                max-width: 100vw;
+                margin-left: 0;
+                align-items:center;
+              }
+
+            .hello{
+              font-size: 8vw;
+              line-height: 50px;
+            }
+
+            .introductory-text{
+              font-size: 4vw;
+            }
+
+            .button-learn{
+              font-size: 4vw;
+            }
+
               h1 {
-                font-size: 60px;
+                font-size: 8vw;
+              }
+
+              .content-title{
+                margin-top: 20px;
+                h2 {
+                  font-size: 13vw;
+                  letter-spacing: 3px;
+                }
+
+                h3 {
+                  font-size: 3vw;
+                }
               }
             }
           }
