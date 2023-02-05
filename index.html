@@ -11,86 +11,100 @@
   <body>
     <div class="wrapper">
 
-      <div class="burger-menu">
-        <span class = "menu-line"></span>
-      </div>
-
-      <div class="header-navbar">
-        <a class="nav-link" href="#about-me">About me</a>
-        <a class="nav-link" href="#portfolio">Portfolio</a>
-        <a class="nav-link" href="#skills">Skills</a>
-        <a class="nav-link" href="#contacts">Contacts</a>
-      </div>
-
-      <div class="slider">
-        <div class="slider-line">
-          <div class="slide">
-            <div class="content first-slide">
-              <h2 class="hello">Hello <span class="world">world!</span></h2>
-              <h1>I'm <span>Oleksandr Iefymchuk</span></h1>
-              <p class = "introductory-text">Junior Front-End Developer</p>
-              <p class = "introductory-text">Find out more about what I do</p>
-              <button class="button-learn">Learn more</button>
-            </div>
-          </div>
-          <div class="slide">
-            <div class="content">
-              <div class="content-title">
-                <h2>About me</h2>
-                <h3>Story</h3>
-              </div>
-            </div>
-          </div>
-          <div class="slide">
-            <div class="content">
-              <div class="content-title">
-                <h2>Portfolio</h2>
-                <h3>My Works</h3>
-              </div>
-            </div>
-          </div>
-          <div class="slide">
-            <div class="content">
-              <div class="content-title">
-                <h2>Skills</h2>
-                <h3>What I Know</h3>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide">
-            <div class="content">
-              <div class="content-title">
-                <h2>Contacts</h2>
-                <h3>Start Chatting</h3>
-              </div>
-            </div>
-          </div>
+      <header>
+        <div class="burger-menu">
+          <span class = "menu-line"></span>
         </div>
-      </div>
-      <div class="slider-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
+  
+        <div class="header-navbar">
+          <ul>
+            <li><a class="nav-link" href="#about-me" data-text="About me">About me</a></li>
+            <li><a class="nav-link" href="#portfolio" data-text="Portfolio">Portfolio</a></li>
+            <li><a class="nav-link" href="#skills" data-text="Skills">Skills</a></li>
+            <li><a class="nav-link" href="#contacts" data-text="Contacts">Contacts</a></li>
+          </ul>
+        </div>
+      </header>
 
-      <button class="button-slider-next">
-        <svg class="button-border-svg"
-          width="50px"
-          height="50px"
-          viewbox="0 0 52 52"
-        >
-          <polyline points="50,1 50,50 1,50 1,1 50,1" />
-        </svg>
-        <svg width="20px" height="20px" viewbox="0 0 400 400">
-          <polygon
-            style="fill: #ffffff"
-            points="386,112 205,248 24,112 0,144 205,298 410,144"
-          />
-        </svg>
-      </button>
+      <main>
+          <div class="slider">
+            <div class="slide">
+              <div class="content first-slide">
+                <h2 class="hello">Hello <span class="world">world!</span></h2>
+                <h1>I'm <span>Oleksandr Iefymchuk</span></h1>
+                <h3 class = "introductory-text">Junior Front-End Developer</h3>
+                <!--<p class = "introductory-text">I create interactive websites that run across platforms and devices.
+                  Find out more about what I do</p>-->
+                <div class="button-learn"><a href="#">Read more</a></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="content">
+                <div class="content-title">
+                  <h2>About me</h2>
+                  <h3>Story</h3>
+                </div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="content">
+                <div class="content-title">
+                  <h2>Portfolio</h2>
+                  <h3>My Works</h3>
+                </div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="content">
+                <div class="content-title">
+                  <h2>Skills</h2>
+                  <h3>What I Know</h3>
+                </div>
+              </div>
+            </div>
+  
+            <div class="slide">
+              <div class="content">
+                <div class="content-title">
+                  <h2>Contacts</h2>
+                  <h3>Start Chatting</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+        <div class="slider-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+  
+        <button class="button-slider-next">
+          <svg class="button-border-svg"
+            width="50px"
+            height="50px"
+            viewbox="0 0 52 52"
+          >
+            <polyline points="50,1 50,50 1,50 1,1 50,1" />
+          </svg>
+          <svg width="20px" height="20px" viewbox="0 0 400 400">
+            <polygon
+              style="fill: #ffffff"
+              points="386,112 205,248 24,112 0,144 205,298 410,144"
+            />
+          </svg>
+        </button>
+      </main>
+
+      <footer>
+        <div class="follow-me">
+          <a href="https://www.instagram.com/aleksandr_iefymchuk?utm_source=qr"><img src="img/instagram.svg" height="30" alt="Instagram"></a> 
+          <a href="https://www.facebook.com/profile.php?id=100002113240367"><img src="img/facebook.svg" height="30"></a>
+          <a href="https://www.linkedin.com/in/oleksandr-iefymchuk-b217b3207"><img src="img/linkedin-in.svg" height="30"></a>
+      </div>
+      </footer> 
     </div>
   </body>
 </html>

@@ -45,12 +45,35 @@
   transition: all 0.5s;
 }
 
+@mixin button-light {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2vw;
+  height: 4px;
+  background-color: map-get($colors, extra-color);
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgb(123, 104, 238),
+    0 0 15px rgb(123, 104, 238),
+    0 0 30px rgb(123, 104, 238),
+    0 0 60px rgb(123, 104, 238);
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+
+@mixin button-light-hover {
+  height: 50%;
+  width: 100%;
+  border-radius: 0;
+  transition-delay: 0.3s;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
 
 body {
   font-family: $main-font;
@@ -59,330 +82,464 @@ body {
   height: 100%;
   background: map-get($colors , bg-color);
   overflow: hidden;
+}
 
-  .wrapper {
-    height: 100vh;
-    max-width: 100%;
-    overflow: hidden;
+.wrapper {
+  height: 100vh;
+  max-width: 100%;
+  overflow: hidden;
+}
 
-    .burger-menu {
-      cursor: pointer;
-      display: block;
-      width: 55px;
-      height: 40px;
-      position: fixed;
-      top: 5vh;
-      right: 4vw;
-      z-index: 4;
+.burger-menu {
+  cursor: pointer;
+  display: block;
+  width: 55px;
+  height: 40px;
+  position: fixed;
+  top: 5vh;
+  right: 3%;
+  z-index: 4;
 
-      .menu-line {
-        @include burger-line;
-        top: 50%;
-        width: 55%;
-        transform: scale(1) translate(0px, -50%);
+  .menu-line {
+    @include burger-line;
+    top: 50%;
+    width: 55%;
+    transform: scale(1) translate(0px, -50%);
 
-        &._activ {
-          transform: scale(0);
-        }
-      }
+    &._activ {
+      transform: scale(0);
+    }
+  }
 
-      &::before {
-        @include burger-line;
-        content: "";
-        top: 20%;
-        transition: all 0.3s;
-      }
+  &::before {
+    @include burger-line;
+    content: "";
+    top: 20%;
+    transition: all 0.3s;
+  }
 
-      &::after {
-        @include burger-line;
-        content: "";
-        bottom: 20%;
-        transition: all 0.7s;
-      }
+  &::after {
+    @include burger-line;
+    content: "";
+    bottom: 20%;
+    transition: all 0.7s;
+  }
 
-      &._activ::before {
-        transition: all 0.5s;
-        top: 50%;
-        transform: rotate(-45deg) translate(0px, -50%);
-      }
+  &._activ::before {
+    transition: all 0.5s;
+    top: 50%;
+    transform: rotate(-45deg) translate(0px, -50%);
+  }
 
-      &._activ::after {
-        transition: all 0.5s;
-        bottom: 50%;
-        transform: rotate(45deg) translate(0px, 50%);
-      }
+  &._activ::after {
+    transition: all 0.5s;
+    bottom: 50%;
+    transform: rotate(45deg) translate(0px, 50%);
+  }
 
-      &:hover::before,
-      &:hover .menu-line,
-      &:hover::after {
-        background-position: 0%;
-      }
+  &:hover::before,
+  &:hover .menu-line,
+  &:hover::after {
+    background-position: 0%;
+  }
+}
+
+.header-navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 5vw;
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 0, 17, 0.9);
+  z-index: 3;
+  overflow: hidden;
+  transition: all 1s ease 0s;
+
+  &._activ {
+    left: 0;
+  }
+
+  ul {
+    position: relative;
+
+    &:hover li a {
+      color: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  li {
+    text-align: center;
+    list-style: none;
+
+    &:hover .nav-link {
+      color: #000;
     }
 
-    .header-navbar {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content:space-evenly;
-      font-size: 5vw;
-      position: fixed;
-      top: 0;
-      left: 100%;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 3;
-      overflow: auto;
-      transition: all 1s ease 0s;
-
-      &._activ {
-        left: 0;
-      }
-
-      .nav-link{
-        text-decoration: none;
-        font-weight: 600;
-        -webkit-text-fill-color: transparent;
-        -webkit-text-stroke: 0.5px #fff;
-      }
-
+    &:nth-child(6n+1) a::before {
+      background-color: #73d5d5;
     }
 
-    .slider {
-      display: flex;
-
-      .slider-line {
-        position: relative;
-        width: 100%;
-        transition: all ease 1s;
-
-        .slide {
-          height: 100vh;
-
-          .content {
-            height: 100vh;
-            width: 100vw;
-            position: absolute;
-
-            &.first-slide{
-              font-family: $extra-font;
-              max-width: 40vw;
-              margin-left: 10%;
-              display: flex;
-              flex-direction: column;
-              align-items:flex-start;
-              justify-content:center;
-            }
-
-            .content-title{
-              position: relative;
-
-              h2{
-                letter-spacing: 5px;
-                font-size: 11vw;
-                -webkit-text-fill-color: transparent;
-                -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
-                text-align: center;
-              }
-  
-              h3{
-                color: map-get($colors, main-color);
-                position: absolute;
-                top: 70%;
-                left: 50%;
-                transform: translate(-50%, -70%);
-                font-weight: 400;
-              }
-            }
-
-            h1 {
-              color: map-get($colors, extra-color);
-              font-size: 3.7vw;
-              font-weight: 300;
-              text-shadow: map-get($colors, extra-color) 2px -2px 4px, rgb(67, 35, 246) -2px -3px 6px;
-
-              span {
-                color: map-get($colors, main-color);
-              }
-            }
-
-            .hello{
-              font-weight: 400;
-              font-size: 3.5vw;
-              -webkit-text-fill-color: #fff;
-            }
-
-            .introductory-text{
-              color: map-get($colors, main-color);
-            }
-
-            .button-learn{
-              font-family: $main-font;
-              font-size: 1.2vw;
-              font-weight: 200;
-              width: 180px;
-              height: 56px;
-              margin-top: 25px;
-              background-color: transparent;
-              color:map-get($colors , main-color);
-              border: 2px solid #fff;
-              letter-spacing: 1.2px;
-            }
-          }
-
-
-        }
-      }
+    &:nth-child(6n+2) a::before {
+      background-color: #5ae167;
     }
 
-    .slider-dots {
+    &:nth-child(6n+3) a::before {
+      background-color: #a29bfe;
+    }
+
+    &:nth-child(6n+4) a::before {
+      background-color: #fae162;
+    }
+  }
+
+  .nav-link {
+    color: rgb(255, 255, 255);
+    z-index: 3;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+
+    &::before {
+      content: '';
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1px #fff;
       position: absolute;
+      white-space: nowrap;
       top: 50%;
-      left: 5%;
-      z-index: 2;
-      width: 50px;
-      text-align: center;
-      transform: translate(-5%, -50%);
-
-      .dot {
-        width: 9px;
-        height: 9px;
-        display: block;
-        background: map-get($colors, main-color);
-        margin: 50% auto;
-        cursor: pointer;
-
-        &:hover {
-          background: map-get($colors, extra-color);
-        }
-
-        &.active {
-          background: map-get($colors, extra-color);
-          width: 11px;
-          height: 11px;
-
-          &::after {
-            content: "";
-            position: relative;
-            display: block;
-            width: 21px;
-            height: 21px;
-            border: 1px solid map-get($colors, main-color);
-            transform: translate(-25%, -25%);
-          }
-        }
-      }
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14vw;
+      text-transform: uppercase;
+      z-index: -1;
+      opacity: 0;
+      letter-spacing: 200px;
+      transition: letter-spacing 0.5s;
     }
 
-    .button-slider-next {
-      @include position-center;
-      cursor: pointer;
+    &:hover::before {
+      content: attr(data-text);
+      opacity: 1;
+      letter-spacing: 10px;
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  transition: all ease 1s;
+
+  .slide {
+    height: 100vh;
+
+    .content {
+      height: 100vh;
+      width: 100vw;
       position: absolute;
-      top: 90%;
-      z-index: 2;
-      padding: 10px;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      background: map-get($colors , button-color);
-      border: none;
 
-      &::before {
-        @include position-center;
-        content: "";
-        width: 35px;
-        height: 35px;
-        border: 1px solid map-get($colors, main-color);
-        box-shadow: 0 0 60px rgba(123, 104, 238, 0.5);
-        transition: all 0.5s ease-in-out 0s;
+      &.first-slide {
+        font-family: $extra-font;
+        max-width: 40vw;
+        margin-left: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
       }
 
-      &::after {
-        @include position-center;
-        @include animation('square 1.5s infinite');
-        content: "";
-        border: 2px solid map-get($colors, extra-color);
+      .content-title {
+        position: relative;
+
+        h2 {
+          letter-spacing: 5px;
+          font-size: 11vw;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
+          text-align: center;
+        }
+
+        h3 {
+          color: map-get($colors, main-color);
+          position: absolute;
+          top: 70%;
+          left: 50%;
+          transform: translate(-50%, -70%);
+          font-weight: 400;
+        }
       }
 
-      &.stop-anim::after {
-        @include stop-anim;
+      h1 {
+        color: map-get($colors, extra-color);
+        font-size: 3.7vw;
+        font-weight: 300;
+        text-shadow: map-get($colors, extra-color) 2px -2px 4px, rgb(67, 35, 246) -2px -3px 6px;
+
+        span {
+          color: map-get($colors, main-color);
+        }
       }
 
-      &:hover::after {
-        @include stop-anim;
+      .hello {
+        font-weight: 400;
+        font-size: 3.5vw;
+        -webkit-text-fill-color: #fff;
       }
 
-      &:hover::before {
-        width: 60px;
-        height: 60px;
+      .introductory-text {
+        color: map-get($colors, main-color);
       }
 
-      .button-border-svg {
-        position: absolute;
-        left: 0;
-        top: 0;
-        fill: none;
-        stroke: map-get($colors, main-color);
-        stroke-width: 3px;
-        stroke-dasharray: 150 300;
-        stroke-dashoffset: 150;
-        transition: 1s ease-in-out;
+      .button-learn {
+        cursor: pointer;
+        position: relative;
+        font-family: $main-font;
+        width: 12vw;
+        height: 3.5vw;
+        margin-top: 25px;
 
-        &:hover {
-          stroke-dashoffset: -300;
+        a {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2vw;
+          font-weight: 200;
+          background-color: rgba(255, 255, 255, 0.05);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+          color: map-get($colors , main-color);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-left: none;
+          border-right: none;
+          letter-spacing: 1px;
+          overflow: hidden;
+          text-decoration: none;
+          transition: 0.5s;
+          backdrop-filter: blur(15px);
+          z-index: 2;
+
+          &:hover {
+            letter-spacing: 3px;
+          }
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.15), transparent);
+            transform: skew(45deg) translateX(0);
+            transition: 0.5s;
+          }
+
+          &:hover::before {
+            transform: skew(45deg) translateX(200px);
+          }
+        }
+
+        &::before {
+          @include button-light;
+          top: -1px;
+        }
+
+        &:hover::before {
+          @include button-light-hover;
+          top: 0;
+        }
+
+        &::after {
+          @include button-light;
+          bottom: -1px;
+        }
+
+        &:hover::after {
+          @include button-light-hover;
+          bottom: 0;
         }
       }
     }
   }
 }
 
+.slider-dots {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  z-index: 2;
+  width: 50px;
+  text-align: center;
+  transform: translate(-5%, -50%);
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    display: block;
+    background: map-get($colors, main-color);
+    margin: 50% auto;
+    cursor: pointer;
+
+    &:hover {
+      background: map-get($colors, extra-color);
+    }
+
+    &.active {
+      background: map-get($colors, extra-color);
+      width: 11px;
+      height: 11px;
+
+      &::after {
+        content: "";
+        position: relative;
+        display: block;
+        width: 21px;
+        height: 21px;
+        border: 1px solid map-get($colors, main-color);
+        transform: translate(-25%, -25%);
+      }
+    }
+  }
+}
+
+.button-slider-next {
+  @include position-center;
+  cursor: pointer;
+  position: absolute;
+  top: 90%;
+  z-index: 2;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  background: map-get($colors , button-color);
+  border: none;
+
+  &::before {
+    @include position-center;
+    content: "";
+    width: 35px;
+    height: 35px;
+    border: 1px solid map-get($colors, main-color);
+    box-shadow: 0 0 60px rgba(123, 104, 238, 0.5);
+    transition: all 0.5s ease-in-out 0s;
+  }
+
+  &::after {
+    @include position-center;
+    @include animation('square 1.5s infinite');
+    content: "";
+    border: 2px solid map-get($colors, extra-color);
+  }
+
+  &.stop-anim::after {
+    @include stop-anim;
+  }
+
+  &:hover::after {
+    @include stop-anim;
+  }
+
+  &:hover::before {
+    width: 60px;
+    height: 60px;
+  }
+
+  .button-border-svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: none;
+    stroke: map-get($colors, main-color);
+    stroke-width: 3px;
+    stroke-dasharray: 150 300;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+
+    &:hover {
+      stroke-dashoffset: -300;
+    }
+  }
+}
+
+.follow-me{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  right: 3%;
+  transform: translate(-3%, -50%);
+
+  a{
+    margin-bottom: 5px;
+  }
+
+
+}
+
+
 @media screen and (max-width: 900px) {
 
-  html,
-  body {
-    .wrapper {
-      .slider {
-        .slider-line {
-          .slide {
-            .content {
-              height: 50vh;
-              width: 100vw;
+  .header-navbar {
+    font-size: 10vw;
+    li{
+      padding-top: 2vw;
+      padding-bottom: 2vw;
+    }
 
-              &.first-slide{
-                max-width: 100vw;
-                margin-left: 0;
-                align-items:center;
-              }
+  }
+  .slider {
+    .slide {
+      .content {
+        height: 50vh;
+        width: 100vw;
+        margin: 0 auto;
 
-            .hello{
-              font-size: 8vw;
-              line-height: 50px;
-            }
+        &.first-slide {
+          max-width: 80vw;
+          align-items: center;
+          text-align: center;
+        }
 
-            .introductory-text{
-              font-size: 4vw;
-            }
+        .hello {
+          font-size: 8vw;
+          line-height: 50px;
+        }
 
-            .button-learn{
-              font-size: 4vw;
-            }
+        .introductory-text {
+          font-size: 4vw;
+        }
 
-              h1 {
-                font-size: 8vw;
-              }
+        .button-learn {
+          font-size: 4vw;
+        }
 
-              .content-title{
-                margin-top: 20px;
-                h2 {
-                  font-size: 13vw;
-                  letter-spacing: 3px;
-                }
+        h1 {
+          font-size: 7vw;
+        }
 
-                h3 {
-                  font-size: 3vw;
-                }
-              }
-            }
+        .content-title {
+          margin-top: 20px;
+
+          h2 {
+            font-size: 11vw;
+            letter-spacing: 3px;
+          }
+
+          h3 {
+            font-size: 3vw;
           }
         }
       }

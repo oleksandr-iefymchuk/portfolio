@@ -1,6 +1,6 @@
 import {burgerMenu} from './burger'
 
-const sliderLine = document.querySelector(".slider-line");
+const sliderLine = document.querySelector(".slider");
 const slides = document.querySelectorAll(".slide");
 const buttonSliderNext = document.querySelector(".button-slider-next");
 const dots = document.querySelectorAll(".dot");
