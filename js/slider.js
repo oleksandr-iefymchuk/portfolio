@@ -1,9 +1,12 @@
 import {burgerMenu} from './burger'
+import {preloader} from './preloader'
 
 const sliderLine = document.querySelector(".slider");
 const slides = document.querySelectorAll(".slide");
 const buttonSliderNext = document.querySelector(".button-slider-next");
 const dots = document.querySelectorAll(".dot");
+const burgerHeaders = document.querySelectorAll(".nav-link");
+
 
 let count = 0;
 let isMoving = false;
@@ -45,7 +48,7 @@ const scrollUp = () => {
 };
 
 const wheelSlide = (e) => {
-  if (burgerMenu.classList.contains("_activ")){
+  if (burgerMenu.classList.contains('_activ') || !preloader.classList.contains('_hidden')){
     return;
   }
   if (e.deltaY > 0) {
@@ -62,11 +65,13 @@ const wheelSlide = (e) => {
 const currentSlide = (e) => {
   dots.forEach((dot) => dot.classList.remove("active"));
   e.target.classList.add("active");
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].setAttribute("count", i);
-  }
-  let dot = e.target.getAttribute("count");
-  moveSlide((count = dot));
+  burgerHeaders.forEach((dot) => dot.classList.remove("active"));
+
+  dots.forEach((dot, index) => dot.setAttribute("count", index));
+  burgerHeaders.forEach((header, index) => header.setAttribute("count", index+1));
+
+  let targetEl = e.target.getAttribute("count");
+  moveSlide((count = targetEl));
 };
 
 const swipeStart = (e) => {
@@ -89,4 +94,4 @@ const swipeEnd = (e) => {
   }
 }
 
-export {buttonSliderNext, dots, sliderLine, wheelSlide, scrollDown, currentSlide, swipeStart, swipeAction, swipeEnd}
+export {buttonSliderNext, burgerHeaders, dots, sliderLine, wheelSlide, scrollDown, currentSlide,swipeStart, swipeAction, swipeEnd}

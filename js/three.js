@@ -142,7 +142,7 @@ const animate = () => {
   modularGruop.rotation.y -= ((mouse.x*2) + modularGruop.rotation.y) * 0.1;
   modularGruop.rotation.x -= ((-mouse.y*2) + modularGruop.rotation.x) * 0.1;
 
-if (window.innerWidth < 900){
+if (window.innerWidth < 800){
     camera.lookAt(scene.position);
 }else{
   camera.lookAt(camera.position);
