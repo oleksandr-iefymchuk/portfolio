@@ -68,7 +68,7 @@ const currentSlide = (e) => {
   burgerHeaders.forEach((dot) => dot.classList.remove("active"));
 
   dots.forEach((dot, index) => dot.setAttribute("count", index));
-  burgerHeaders.forEach((header, index) => header.setAttribute("count", index+1));
+  burgerHeaders.forEach((header, index) => header.setAttribute("count", index));
 
   let targetEl = e.target.getAttribute("count");
   moveSlide((count = targetEl));

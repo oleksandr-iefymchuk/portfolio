@@ -126,7 +126,7 @@ body {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(#212121, #010319);
+  background: radial-gradient(#062444, #010319);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -294,7 +294,7 @@ body {
     }
 
     &:nth-child(2):hover .nav-link::before {
-      background-color: #5ae167;
+      background-color:  #ffa34e;
     }
 
     &:nth-child(3):hover .nav-link::before {
@@ -303,6 +303,10 @@ body {
 
     &:nth-child(4):hover .nav-link::before {
       background-color: #fae162;
+    }
+
+    &:nth-child(5):hover .nav-link::before {
+      background-color: #5ae167;
     }
 
     .nav-link {
@@ -383,7 +387,7 @@ body {
         }
       }
 
-      h1 {
+      h1 {      
         color: map-get($colors, extra-color);
         font-size: 3.7vw;
         font-weight: 300;
@@ -527,6 +531,56 @@ body {
           }
         }
       }
+
+      .portfolio{
+        max-width: 80%;
+        margin:0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(150px, 260px));
+        grid-template-rows: repeat(2, minmax(150px, 1fr));
+      //  grid-auto-flow: dense;
+       grid-gap: 20px;
+       grid-template-areas:
+       "blockchain blockchain developers adverting"
+       "blockchain blockchain pizza adverting";       
+
+          .website {
+            display: grid;
+            place-items: center;
+            text-align: center;
+            transition: 0.5s;
+
+            a{
+              display: block;
+              width: 100%;
+              height: 100%;
+            }
+
+            &.blockchain {
+              background: url('./../img/blockchain.jpg') left 35%/cover no-repeat;
+              grid-area: blockchain;
+            }
+
+            &.developers {
+              background: url('./../img/developers.jpg') left 35%/cover no-repeat;
+              grid-area: developers;
+            }
+
+            &.pizza {
+              background: url('./../img/pizza-house.jpg') left top/cover no-repeat;
+              grid-area: pizza;
+            }
+
+            &.adverting {
+              background: url('./../img/adverting.jpg') left 35%/cover no-repeat;
+              grid-area: adverting;
+            }
+          }  
+      }
+
+
+
+
     }
   }
 }
@@ -633,7 +687,7 @@ body {
 
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
 
   .header-navbar {
     font-size: 10vw;
@@ -689,7 +743,25 @@ body {
             font-size: 3vw;
           }
         }
+
+        .portfolio{
+          margin-top: 3vw;
+          width: 50vw;
+          height: 74vh;
+          grid-template-areas: none;
+          grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+          grid-template-rows: minmax(auto, auto);
+  
+          .website{
+            grid-column: unset !important;
+            grid-row: unset !important;
+          }
+        }
       }
+
+      
+
+
     }
   }
 }
