@@ -16,8 +16,8 @@
   }
 
   100% {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     opacity: 0;
   }
 }
@@ -98,7 +98,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 2vw;
+  width: 26px;
   height: 4px;
   background-color: map-get($colors, extra-color);
   border-radius: 10px;
@@ -535,17 +535,13 @@ body {
 
       .introduction {
         display: flex;
-        // flex-wrap: wrap;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
         color: #fff;
         font-size: 15px;
         font-weight: 200;
-        margin-top: -10px;
 
         .my-photo {
-          margin-right: 3vw;
-
           img {
             width: 250px;
           }
@@ -553,7 +549,7 @@ body {
 
         .introduction-text {
           text-align: justify;
-          width: 70%;
+          width: 60%;
 
           p {
             margin-bottom: 6px;
@@ -595,7 +591,6 @@ body {
             bottom: 1px;
             z-index: 1;
 
-
             &::before{
               content: "";
               position: absolute;
@@ -627,9 +622,9 @@ body {
               transition: all 0.5s;
 
               svg{
-                transition: all 0.5s;
                 width: 65%;
                 fill: #fff;
+                transition: all 0.3s;
               }
 
               &:hover svg{
@@ -742,11 +737,14 @@ body {
   @include position-center;
   cursor: pointer;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 90%;
   z-index: 2;
   padding: 10px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   font-size: 24px;
   background: map-get($colors , button-color);
   border: none;
@@ -754,8 +752,8 @@ body {
   &::before {
     @include position-center;
     content: "";
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border: 1px solid map-get($colors, main-color);
     box-shadow: 0 0 60px rgba(123, 104, 238, 0.5);
     transition: all 0.5s ease-in-out 0s;
@@ -777,25 +775,10 @@ body {
   }
 
   &:hover::before {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
   }
 
-  .button-border-svg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    fill: none;
-    stroke: map-get($colors, main-color);
-    stroke-width: 3px;
-    stroke-dasharray: 150 300;
-    stroke-dashoffset: 150;
-    transition: 1s ease-in-out;
-
-    &:hover {
-      stroke-dashoffset: -300;
-    }
-  }
 }
 
 
@@ -817,9 +800,11 @@ body {
   .slider {
     .slide {
       .content {
+        width: 87vw;
         justify-content: center;
+        margin-left: 7%;
         &.first-slide {
-          width: 85%;
+          width: 82vw;
           padding-top: 20%;
           justify-content: flex-start;
 
@@ -842,7 +827,9 @@ body {
         .button-learn {
           width: 110px;
           height: 35px;
-          font-size: 4vw;
+          a{
+            font-size: 3vw;
+          }
         }
 
         h1 {
@@ -866,12 +853,11 @@ body {
         .introduction {
           flex-wrap: wrap;
           margin-top: 10px;
-          font-size: 14px;
+          font-size: 12px;
 
           .my-photo {
-  
             img {
-              width: 200px;
+              width: 150px;
               margin-bottom: 15px;
             }
           }
@@ -924,4 +910,12 @@ body {
       }
     }
   }
+
+  .slider-dots {
+    left: 0;
+  }
+
+  .button-slider-next {
+    top: 93%;
+}
 }
