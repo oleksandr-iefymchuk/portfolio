@@ -69,6 +69,23 @@
   }
 }
 
+@include keyframes(anim-dot) {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(calc(3.6deg * var(--num)));
+  }
+}
+
+@include keyframes(circle-line) {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
 
 @mixin position-center {
   position: absolute;
@@ -387,10 +404,15 @@ body {
     justify-content: center;
 
     .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       height: 100vh;
       width: 90vw;
       position: absolute;
       margin-left: 4%;
+
+
 
       &.first-slide {
         font-family: $extra-font;
@@ -581,6 +603,53 @@ body {
           position: relative;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 
+          &::before {
+            @include rainbow-border;
+            border-radius: 4px;
+          }
+
+          &::after {
+            @include rainbow-border;
+            filter: blur(15px);
+          }
+
+
+          &:hover::after,
+          &:hover::before {
+            @include animation('border 20s linear infinite');
+            opacity: 1;
+          }
+
+          &.blockchain {
+            grid-area: blockchain;
+            .website-wrap{
+              background: url('./../img/blockchain.jpg') left 35%/cover no-repeat;
+            }
+          }
+
+          &.developers {
+            grid-area: developers;
+
+            .website-wrap {
+              background: url('./../img/developers.jpg') left 35%/cover no-repeat;
+            }
+          }
+
+          &.pizza {
+            grid-area: pizza;
+
+            .website-wrap {
+              background: url('./../img/pizza-house.jpg') left top/cover no-repeat;
+            }
+          }
+
+          &.adverting {
+            grid-area: adverting;
+
+            .website-wrap {
+              background: url('./../img/adverting.jpg') left 35%/cover no-repeat;
+            }
+          }
 
           .website-wrap{
             position: absolute;
@@ -590,6 +659,8 @@ body {
             right: 1px;
             bottom: 1px;
             z-index: 1;
+            border-radius: 4px;
+
 
             &::before{
               content: "";
@@ -635,56 +706,121 @@ body {
             &:hover a{
               opacity: 1;
             }
-
-          }
-
-          &::before {
-            @include rainbow-border;
-          }
-
-          &::after {
-            @include rainbow-border;
-            filter: blur(15px);
-          }
-
-
-          &:hover::after,
-          &:hover::before {
-            @include animation('border 20s linear infinite');
-            opacity: 1;
-          }
-
-          &.blockchain {
-            grid-area: blockchain;
-            .website-wrap{
-              background: url('./../img/blockchain.jpg') left 35%/cover no-repeat;
-            }
-          }
-
-          &.developers {
-            grid-area: developers;
-
-            .website-wrap {
-              background: url('./../img/developers.jpg') left 35%/cover no-repeat;
-            }
-          }
-
-          &.pizza {
-            grid-area: pizza;
-
-            .website-wrap {
-              background: url('./../img/pizza-house.jpg') left top/cover no-repeat;
-            }
-          }
-
-          &.adverting {
-            grid-area: adverting;
-
-            .website-wrap {
-              background: url('./../img/adverting.jpg') left 35%/cover no-repeat;
-            }
           }
         }
+      }
+
+      .progress-bar{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        max-width: 60vw;
+
+        .card{
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width: 220px;
+          height: 160px;
+          font-size: 14px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.07);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+
+          .percent{
+            position: relative;
+            width: 126px;
+            height: 126px;
+
+            .perscent-dot{
+              position: absolute;
+              inset: 3px;
+              z-index: 4;
+
+
+              &.anim{
+                @include animation('anim-dot 2s linear forwards 0.8s');
+              }
+              
+              
+              &::before{
+                content: "";
+                position: absolute;
+                top: -5px;
+                left: 50%;
+                transform: translate(-50%);
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: #7b68ee;
+                box-shadow: 0 0 10px #7b68ee, 0 0 30px;
+              }
+            }
+
+            .progress-circle{
+              position: relative;
+              width: 126px;
+              height: 126px;
+              transform: rotate(270deg);
+
+              circle{
+                width: 100%;
+                height: 100%;
+                fill: transparent;
+                stroke-width: 2;
+                stroke: #2c2c2c;
+                transform: translate(3px, 3px);
+
+                &:nth-child(2){
+                  stroke: #7b68ee;
+                  opacity: 0;
+                  stroke-dasharray: 377;
+                  stroke-dashoffset: calc(377 - (377 * var(--num))/100);
+                }
+              }
+            }
+
+            .anim{
+              circle{
+                &:nth-child(2){
+                  @include animation('circle-line 1s linear forwards 3s');
+              }
+            }
+          }
+
+            .skill{
+              position: absolute;
+              opacity: 0;
+              inset:0;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              color: #fff;
+              @include animation('circle-line 1s linear forwards 2.5s');
+
+              h3{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                span{
+                  font-weight: 200;
+                  font-size: 12px;
+                }
+              }
+            }
+
+           
+          }
+        }
+
       }
 
 
@@ -787,30 +923,34 @@ body {
 @media screen and (max-width: 900px) {
 
   .header-navbar {
-    font-size: 10vw;
+    font-size: 10.5vw;
 
-    li {
-      .nav-link {
-        padding-top: 2vw;
-        padding-bottom: 2vw;
+    ul{
+      padding-top: 30px;
+      li {
+        .nav-link {
+          padding-top: 4vw;
+          padding-bottom: 4vw;
+        }
       }
     }
+
+
   }
 
   .slider {
     .slide {
       .content {
         width: 87vw;
-        justify-content: center;
-        margin-left: 7%;
         &.first-slide {
+          margin-left: 7%;
           width: 82vw;
           padding-top: 20%;
           justify-content: flex-start;
 
           .follow-me {
             a {
-              margin-bottom: 2vw;
+              margin-bottom: 4vw;
             }
           }
         }
@@ -846,7 +986,9 @@ body {
           }
 
           h3 {
-            font-size: 4vw;
+            font-size: 3.5vw;
+            width: 100%;
+            text-align: center;
           }
         }
 
@@ -907,6 +1049,20 @@ body {
             }
           }
         }
+
+        .progress-bar{
+          margin-top: 30px;
+          gap: 10px;
+          max-width: 86vw;
+  
+          .card{
+            width: 140px;
+            height: 156px;
+          }
+        }
+
+
+        
       }
     }
   }

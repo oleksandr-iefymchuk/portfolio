@@ -6,6 +6,9 @@ const slides = document.querySelectorAll(".slide");
 const buttonSliderNext = document.querySelector(".button-slider-next");
 const dots = document.querySelectorAll(".dot");
 const burgerHeaders = document.querySelectorAll(".nav-link");
+const perscentDot = document.querySelectorAll(".perscent-dot");
+const progressCircle = document.querySelectorAll(".progress-circle");
+
 
 
 let count = 0;
@@ -29,6 +32,11 @@ const moveSlide = () => {
   buttonSliderNext.classList.add("stop-anim");
   dots.forEach((el) => el.classList.remove("active"));
   dots[count].classList.add("active");
+  
+  if(count === 3){
+    perscentDot.forEach((el) => el.classList.add("anim"));
+    progressCircle.forEach((el) => el.classList.add("anim"));
+  }
 };
 
 const scrollDown = () => {
