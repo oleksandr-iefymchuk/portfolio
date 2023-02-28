@@ -4,23 +4,34 @@ import map from '../img/map.webp';
 
 
 const slides = document.querySelectorAll(".slide");
+const three = document.querySelector(".three");
+
 const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+const renderer2 = new THREE.WebGLRenderer({antialias:true, alpha:true});
 renderer.setSize( window.innerWidth, window.innerHeight );
+renderer2.setSize( window.innerWidth, window.innerHeight );
 // renderer.setClearColor(0x000007, 0);
-slides[0].appendChild( renderer.domElement );
+three.appendChild( renderer.domElement );
+slides[0].appendChild( renderer2.domElement );
 
 const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
 camera.position.set(-0.7, 0, 3);
 
 const scene = new THREE.Scene();
+const scene2 = new THREE.Scene();
 
 scene.fog = new THREE.Fog(0x000007, 0.5, 3.5);
+scene2.fog = new THREE.Fog(0x000007, 0.5, 3.5);
 // const bg = new THREE.TextureLoader().load('/img/3c4070fba708ecb7c07a045fadd884bc.jpeg');
 // scene.background = bg;
 
 
 const ambientLight = new THREE.AmbientLight();
 ambientLight.intensity = 5;
+
+const ambientLight2 = new THREE.AmbientLight();
+ambientLight2.intensity = 5;
+
 const light = new THREE.SpotLight(0xFFFFFF, 10);
 light.position.set(-4, 3, 1);
 light.castShadow = true;
@@ -46,10 +57,16 @@ scene.add(light);
 scene.add(lightTop);
 scene.add(lightBottom);
 
+scene2.add(ambientLight2);
+scene2.add(light);
+scene2.add(lightTop);
+scene.add(lightBottom);
+
 const onWindowResize = () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer2.setSize( window.innerWidth, window.innerHeight );
 }
 window.addEventListener('resize', onWindowResize);
 
@@ -64,7 +81,7 @@ window.addEventListener('mousemove', onMouseMove, false);
 const particularGruop = new THREE.Object3D();
 const modularGruop = new THREE.Object3D();
 scene.add(particularGruop);
-scene.add(modularGruop);
+scene2.add(modularGruop);
 
 const mathRandom = (num = 1) => {
   const setNumber = - Math.random() * num + Math.random() * num;
@@ -75,7 +92,7 @@ const getRandomNum = (min, max) => Math.random() * (max - min) + min;
 const generateParticle = (num, pos) => {
   const gmaterial = new THREE.MeshStandardMaterial({color:0xFFFFFF, roughness: 0.3, side:THREE.DoubleSide});
   const gparticular = new THREE.CircleGeometry(0.2, 5);
-  for (var i = 1; i < num; i++) {
+  for (let i = 1; i < num; i++) {
     const pscale = 0.01 + Math.abs(mathRandom(0.05));
     const particular = new THREE.Mesh(gparticular, gmaterial);
     particular.position.set(mathRandom(3),mathRandom(2),mathRandom(pos));
@@ -148,7 +165,9 @@ if (window.innerWidth < 900){
   camera.lookAt(camera.position);
 
 }
-  renderer.render( scene, camera );  
+  renderer.render( scene, camera ); 
+  renderer2.render( scene2, camera ); 
+
 }
 
 export {animate, init}
