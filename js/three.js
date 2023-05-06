@@ -20,6 +20,7 @@ camera.position.set(-0.7, 0, 3);
 const scene = new THREE.Scene();
 const scene2 = new THREE.Scene();
 
+scene.position.set(0, 0.4, 0)
 scene.fog = new THREE.Fog(0x000007, 0.5, 3.5);
 scene2.fog = new THREE.Fog(0x000007, 0.5, 3.5);
 // const bg = new THREE.TextureLoader().load('/img/3c4070fba708ecb7c07a045fadd884bc.jpeg');
@@ -146,18 +147,18 @@ const animate = () => {
   
   for (let i = 0; i < modularGruop.children.length; i++) {
     const newCubes = modularGruop.children[i];
-    newCubes.rotation.x += 0.008;
-    newCubes.rotation.y += 0.005;
-    newCubes.rotation.z += 0.003;
+    newCubes.rotation.x += 0.004;
+    newCubes.rotation.y += 0.001;
+    newCubes.rotation.z += 0.0009;
     newCubes.position.x = Math.sin(time * newCubes.positionZ) * newCubes.positionY;
     newCubes.position.y = Math.cos(time * newCubes.positionX) * newCubes.positionZ;
     newCubes.position.z = Math.sin(time * newCubes.positionY) * newCubes.positionX;
   }
-  particularGruop.rotation.z -= 0.002;
-  particularGruop.rotation.y -= (mouse.x + particularGruop.rotation.y) * 0.025;
-  particularGruop.rotation.x -= (-mouse.y + particularGruop.rotation.x) * 0.1;
-  modularGruop.rotation.y -= ((mouse.x*2) + modularGruop.rotation.y) * 0.1;
-  modularGruop.rotation.x -= ((-mouse.y*2) + modularGruop.rotation.x) * 0.1;
+  particularGruop.rotation.z -= 0.0004;
+  particularGruop.rotation.y -= (mouse.x + particularGruop.rotation.y) * 0.015;
+  particularGruop.rotation.x -= (-mouse.y + particularGruop.rotation.x) * 0.08;
+  modularGruop.rotation.y -= ((mouse.x*2) + modularGruop.rotation.y) * 0.02;
+  modularGruop.rotation.x -= ((-mouse.y*2) + modularGruop.rotation.x) * 0.02;
 
 if (window.innerWidth < 900){
     camera.lookAt(scene.position);
